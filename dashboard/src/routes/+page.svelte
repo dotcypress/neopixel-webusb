@@ -32,6 +32,15 @@
     }
   });
 
+  async function connect() {
+    let usbDevice = await usb.requestDevice({
+      filters: [{ vendorId: 0x1209, productId: 0xb420 }]
+    });
+    if (!usbDevice.opened) {
+      open(usbDevice);
+    }
+  }
+
   async function open(usbDevice) {
     device?.close();
     device = null;
@@ -56,15 +65,6 @@
     color = `#${r}${g}${b}`;
   }
 
-  async function connect() {
-    let usbDevice = await usb.requestDevice({
-      filters: [{ vendorId: 0x16c0, productId: 0x05dc }]
-    });
-    if (!usbDevice.opened) {
-      open(usbDevice);
-    }
-  }
-
   async function sendColor() {
     let rgb = parseInt(color.replaceAll('#', ''), 16);
     await device?.controlTransferOut(
@@ -72,10 +72,10 @@
         requestType: 'vendor',
         recipient: 'device',
         request: 0x01,
-        value: 0x000,
+        value: 0x0000,
         index: 0x0000
       },
-      new Uint8Array([(rgb >> 16) & 0xff, (rgb >> 8) & 0xff, rgb & 0xff])
+      new Uint8Array([rgb >> 16, rgb >> 8, rgb])
     );
   }
 </script>

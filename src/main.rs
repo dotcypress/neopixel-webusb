@@ -20,8 +20,8 @@ use smart_leds::SmartLedsWrite;
 use usb_device::{class_prelude::*, prelude::*};
 use usbd_webusb::*;
 
-pub const VID: u16 = 0x16c0;
-pub const PID: u16 = 0x05dc;
+pub const VID: u16 = 0x1209;
+pub const PID: u16 = 0xb420;
 pub const MANUFACTURER: &str = "vitaly.codes";
 pub const PRODUCT: &str = "NeoPixel Controller";
 pub const SERIAL_NUMBER: &str = "_neopixel_";
