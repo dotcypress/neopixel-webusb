@@ -1,12 +1,15 @@
-# neopixel-webusb: WebUSB NeoPixel Controller
+# WebUSB NeoPixel Controller
+
+✨ WebUSB NeoPixel Controller for RP2040 based hardware.
 
 ## Installation
 
-1. Download latest firmware build from [Releases page](https://github.com/dotcypress/neopixel-webusb/releases)
-2. Hold the BOOTSEL button while connecting your board to the computer
-3. Copy firmware file downloaded earlier to the RPi-RP2 disk
-4. Go to https://neopixel-webusb.vercel.app
-5. Enjoy
+1. Connect NeoPixel data pin to RP2040 GPIO12 pin.
+2. Download latest firmware build from [Releases page](https://github.com/dotcypress/neopixel-webusb/releases)
+3. Hold the BOOTSEL button while connecting your board to the computer
+4. Copy firmware file downloaded earlier to the RPi-RP2 disk
+5. Go to https://neopixel-webusb.vercel.app
+6. Enjoy
 
 ## Building firmware
 
