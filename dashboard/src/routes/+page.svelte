@@ -85,7 +85,7 @@
   <div class="grid">
     <div class="cell -8of12 -left">
       <div class="grid" style="margin-top: 8px;">
-        <div class="cell -1of12" style="color:yellow;">
+        <div id="sun" class="cell -1of12">
           <SunIcon />
         </div>
         <div class="cell -3of12" style="line-height: 24px;">NeoPixel WebUSB</div>
@@ -93,7 +93,7 @@
     </div>
     <div class="cell -4of12 -right">
       <div class="pull-right">
-        {#if !device}
+        {#if usb && !device}
           <button class="btn btn-warning" title="Connect" on:click={connect}>
             <ZapIcon />
           </button>
@@ -105,16 +105,14 @@
     </div>
   </div>
   <br />
-  {#if usb}
-    {#if device}
-      <div class="grid -center">Tap to change NeoPixel color</div>
-      <div class="grid -center">
-        <div id="color-picker" style="background-color: {color};">
-          <input type="color" bind:value={color} />
-        </div>
+  {#if device}
+    <div class="grid -center">Tap to change NeoPixel color</div>
+    <div class="grid -center">
+      <div id="color-picker" style="background-color: {color};">
+        <input type="color" bind:value={color} />
       </div>
-    {/if}
-  {:else}
+    </div>
+  {:else if !usb}
     <div class="alert alert-error">
       The <a href="https://caniuse.com/?search=web-usb">WebUSB API</a> is not supported by your browser
     </div>
@@ -122,10 +120,34 @@
 </div>
 
 <style>
+  @keyframes colorRotate {
+    from {
+      color: #e81416;
+    }
+    20% {
+      color: #ffa500;
+    }
+    40% {
+      color: #faeb36;
+    }
+    60% {
+      color: #79c314;
+    }
+    80% {
+      color: #487de7;
+    }
+    100% {
+      color: #70369d;
+    }
+  }
   input[type='color'] {
     opacity: 0;
     width: 234px;
     height: 100px;
+  }
+  #sun {
+    animation: colorRotate 3s linear 0s infinite;
+    animation-direction: alternate;
   }
   #color-picker {
     border: 1px solid #ccc;
