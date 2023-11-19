@@ -66,7 +66,7 @@
   }
 
   async function sendColor() {
-    var rgb = parseInt(color.replaceAll('#', ''), 16);
+    let rgb = parseInt(color.replaceAll('#', ''), 16);
     await device?.controlTransferOut(
       {
         requestType: 'vendor',
