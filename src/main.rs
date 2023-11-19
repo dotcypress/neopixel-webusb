@@ -25,8 +25,6 @@ pub const PID: u16 = 0xb420;
 pub const MANUFACTURER: &str = "vitaly.codes";
 pub const PRODUCT: &str = "NeoPixel Controller";
 pub const SERIAL_NUMBER: &str = "_neopixel_";
-
-pub const PIN_BASE: usize = 27;
 pub const XTAL_FREQ_HZ: u32 = 12_000_000_u32;
 
 #[link_section = ".boot2"]
@@ -108,7 +106,7 @@ mod app {
             pac::NVIC::unmask(pac::Interrupt::USBCTRL_IRQ);
         };
 
-        // Enable NeoPixel
+        // Enable NeoPixel power switch
         pins.gpio11.into_push_pull_output_in_state(PinState::High);
 
         (
