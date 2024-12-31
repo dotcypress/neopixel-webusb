@@ -14,7 +14,7 @@ use hal::pac;
 use hal::usb::UsbBus;
 use hal::Clock;
 use neopixel::*;
-use rp2040_hal::gpio::bank0::Gpio12;
+use rp2040_hal::gpio::bank0::Gpio16;
 use rp2040_hal::pio::SM0;
 use smart_leds::SmartLedsWrite;
 use usb_device::{class_prelude::*, prelude::*};
@@ -33,7 +33,7 @@ pub const XTAL_FREQ_HZ: u32 = 12_000_000_u32;
 pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_W25Q080;
 
 pub type NeopixelDriver =
-    ws2812_pio::Ws2812Direct<pac::PIO1, SM0, Pin<Gpio12, FunctionPio1, PullDown>>;
+    ws2812_pio::Ws2812Direct<pac::PIO1, SM0, Pin<Gpio16, FunctionPio1, PullDown>>;
 
 #[rtic::app(device = pac, peripherals = true)]
 mod app {
@@ -82,7 +82,7 @@ mod app {
 
         let (mut neo_pio, sm0, _, _, _) = ctx.device.PIO1.split(&mut resets);
         let driver = ws2812_pio::Ws2812Direct::new(
-            pins.gpio12.into_function(),
+            pins.gpio16.into_function(),
             &mut neo_pio,
             sm0,
             clocks.peripheral_clock.freq(),
